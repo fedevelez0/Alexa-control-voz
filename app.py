@@ -23,7 +23,7 @@ def on_message(client, userdata, message):
 
 broker="broker.mqttdashboard.com"
 port=1883
-client1= paho.Client("GIT-HUB")
+client1= paho.Client("voiceClienteF")
 client1.on_message = on_message
 
 
@@ -63,7 +63,7 @@ stt_button.js_on_event("button_click", CustomJS(code="""
 
 result = streamlit_bokeh_events(
     stt_button,
-    events="GET_TEXT",
+    events="voiceClienteF",
     key="listen",
     refresh_on_update=False,
     override_height=75,
@@ -71,11 +71,11 @@ result = streamlit_bokeh_events(
 
 if result:
     if "GET_TEXT" in result:
-        st.write(result.get("GET_TEXT"))
+        st.write(result.get("voiceClienteF"))
         client1.on_publish = on_publish                            
         client1.connect(broker,port)  
-        message =json.dumps({"Act1":result.get("GET_TEXT").strip()})
-        ret= client1.publish("voice_ctrl", message)
+        message =json.dumps({"Act1":result.get("voiceClienteF").strip()})
+        ret= client1.publish("MARCE", message)
 
     
     try:
